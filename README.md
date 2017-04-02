@@ -1,2 +1,2 @@
 # wallpaper-pins
-Uses pinterest wallpaper pins to change desktop background/wallpaper.
+Uses pinterest wallpaper pins to periodically change desktop background/wallpaper.

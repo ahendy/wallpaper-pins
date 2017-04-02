@@ -32,13 +32,19 @@ def get_board_for_user(user_id: str="me"):
     else:
         raise NoFoundWallpaperBoard("No boards containing the word 'Wallpaper' were found")
 
-def get_random_wallpaper_pin(board: dict):
+pinjection = dict(
+    url="https://www.pinterest.com/pin/663788432548423423/",
+    note="download free leopard wallpaper",
+    link="https://www.pinterest.com/r/pin/663788432548423423/4779055074072594921/214f0b54d34475ee6852fc9f046756cc34eb5076e99c982d5dfd567210dd3491",
+    id="663788432548423423",
+)
+def get_random_wallpaper_pin(board: dict, pin=None):
     "Given a wallpaper board retrieve a random wallpaper pin."
     pins = get_request(f"/v1/boards/{board['id']}/pins")
-    pass
-
+    return pin or random.choice(pins['data'])
+    
 if __name__ == '__main__':
     assert(get_request("/v1/me/boards"))
     assert(get_board_for_user()['name'] == "Desktop Wallpapers")
-    get_pins(get_board_for_user())
+    assert(get_random_wallpaper_pin(get_board_for_user(), pin=pinjection) == pinjection)
     print("Tests passed.")
