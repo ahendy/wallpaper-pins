@@ -1,8 +1,8 @@
 import requests
 import json
 import random
+from auth import ACCESS_TOKEN
 
-ACCESS_TOKEN = "AWcpcVrdFgpMpQRvC07ZnA-piWSUFLFh2gy5KRRDdGN_LyBAyAAAAAA"
 BASE_API = "https://api.pinterest.com"
 
 class NoFoundWallpaperBoard(Exception):
@@ -31,7 +31,14 @@ def get_board_for_user(user_id: str="me"):
         return wallpaper_board
     else:
         raise NoFoundWallpaperBoard("No boards containing the word 'Wallpaper' were found")
-    
+
+def get_random_wallpaper_pin(board: dict):
+    "Given a wallpaper board retrieve a random wallpaper pin."
+    pins = get_request(f"/v1/boards/{board['id']}/pins")
+    pass
+
 if __name__ == '__main__':
     assert(get_request("/v1/me/boards"))
     assert(get_board_for_user()['name'] == "Desktop Wallpapers")
+    get_pins(get_board_for_user())
+    print("Tests passed.")
