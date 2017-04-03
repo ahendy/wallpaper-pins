@@ -40,7 +40,8 @@ pinjection = dict(
 )
 def get_random_wallpaper_pin(board: dict, pin=None):
     "Given a wallpaper board retrieve a random wallpaper pin."
-    pins = get_request(f"/v1/boards/{board['id']}/pins")
+    params = dict(fields=["image"])
+    pins = get_request(f"/v1/boards/{board['id']}/pins", params)
     return pin or random.choice(pins['data'])
     
 if __name__ == '__main__':
